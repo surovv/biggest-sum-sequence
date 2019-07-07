@@ -1,11 +1,11 @@
 /**
  * findIndexGreaterThan
  *
- * @param {Array}    arr
- * @param {type}    value
- * @param {Number} [defaultVal=arr.length]
+ * @param {Array.a}    arr
+ * @param {a}    value
+ * @param {a} [defaultVal=arr.length]
  *
- * @returns {Number} smallest index with value greater than second arg
+ * @returns {Number} the index of the first element in the array greater than *value*
  */
 const findIndexGreaterThan = (arr, value, defaultVal = arr.length) => {
   const index = arr.findIndex(val => val > value);
@@ -13,7 +13,7 @@ const findIndexGreaterThan = (arr, value, defaultVal = arr.length) => {
 };
 
 /**
- * separateByIntervals - separates array with given intervals
+ * separateByIntervals - separates array to subarrays with given intervals
  *
  * @param {Array} arr
  * @param {Array.Number} intervals
@@ -21,29 +21,29 @@ const findIndexGreaterThan = (arr, value, defaultVal = arr.length) => {
  * @returns {Array.Array} array with subarrays separated with given intervals
  */
 const separateByIntervals = (arr, intervals) => intervals.reduce(
-  (result, interval, index) => result.concat([arr.slice(interval, intervals[index + 1])]),
+  (result, interval, index) => [...result, arr.slice(interval, intervals[index + 1])],
   [],
 );
 
 
 /**
- * combineWithNext - combine element with next in array if possible
+ * combineWithNext - combine array element with the next one, if possible
  *
- * @param {Array} arr
+ * @param {Array.a} arr
  * @param {Number} index
  *
- * @returns {Array.a | a} array with two elements or single element
+ * @returns {Array.a | a} combined pair or single element
  */
 const combineWithNext = (arr, index) => (
   arr[index + 1] === undefined ? arr[index] : [arr[index], arr[index + 1]]
 );
 
 /**
- * getSequence - transforms array of single elements array with single and paired elements
+ * getSequence - transforms single elements array to singles and paires
  *
- * @param {Array} arr
+ * @param {Array.a} arr
  *
- * @returns {Array}
+ * @returns {{Array[Array.a | a]}}
  */
 const getSequence = arr => (
   arr.slice(0, Math.ceil(arr.length / 2)).reduce(
@@ -59,11 +59,12 @@ const concatSequences = ([neg, ones, pos]) => ([
 ]);
 
 /**
- * getSortedArraySequence
+ * getSortedArraySequence - get the sequence of pairs and singles which give
+ *  the biggest possible sum in sortedd array
  *
- * @param {Array} arr
+ * @param {Array.Number} arr sorted array with numbers
  *
- * @returns {Array}
+ * @returns {Array[Array.Number | Number]} array of pairs and singles
  */
 const getSortedArraySequence = arr => (
   concatSequences(
@@ -81,9 +82,9 @@ const getSortedArraySequence = arr => (
 /**
  * getSumSequence - get the sequence of pairs and singles which give the biggest possible sum
  *
- * @param {Array} arr
+ * @param {Array.Number} arr array with numbers
  *
- * @returns {Array} array of pairs and singles
+ * @returns {Array[Array.Number | Number]} array of pairs and singles
  */
 const getSumSequence = arr => getSortedArraySequence([...arr].sort((a, b) => a - b));
 
