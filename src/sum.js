@@ -24,20 +24,34 @@ const maybeGetAt = (arr, index, defaultVal = 1) => (
 const mulWithNext = (arr, index) => arr[index] * maybeGetAt(arr, index + 1);
 
 /**
+ * maybeMulWithNext
+ *
+ * @param {Array.Number} arr
+ * @param {Number} index
+ *
+ * @returns {Number}
+ */
+const maybeMulWithNext = (arr, index) => (
+  arr[index] >= 0 && arr[index] < 1
+    ? arr[index] + maybeGetAt(arr, index + 1, 0)
+    : mulWithNext(arr, index)
+);
+
+/**
  * getPairsSum
  *
  * @param {Array.Number} arr
  *
  * @returns {Number}
  */
-const getPairsSum = arr => sliceIterablePart(arr).reduce(
-  (sum, _, index) => sum + mulWithNext(arr, index * 2),
+const getPairsSum = (arr, mulFn = mulWithNext) => sliceIterablePart(arr).reduce(
+  (sum, _, index) => sum + mulFn(arr, index * 2),
   0,
 );
 
 
 const getArraysSum = ([neg, ones, pos]) => (
-  getPairsSum(neg) + ones.reduce((sum, el) => sum + el, 0) + getPairsSum(pos)
+  getPairsSum(neg, maybeMulWithNext) + ones.reduce((sum, el) => sum + el, 0) + getPairsSum(pos)
 );
 
 
