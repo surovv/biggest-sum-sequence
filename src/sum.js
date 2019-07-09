@@ -1,4 +1,4 @@
-const { separateByRanges, sliceIterablePart } = require('./base');
+const { getRanges, sliceIterablePart } = require('./base');
 
 /**
  * maybeGetAt
@@ -62,11 +62,7 @@ const getArraysSum = ([neg, ones, pos]) => (
  *
  * @returns {Number}
  */
-const getBiggestSum = arr => getArraysSum(
-  separateByRanges(
-    [...arr].sort((a, b) => a - b),
-  ),
-);
+const getBiggestSum = arr => getArraysSum(getRanges([...arr].sort((a, b) => a - b)));
 
 
 module.exports = {

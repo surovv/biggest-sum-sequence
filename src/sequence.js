@@ -1,4 +1,4 @@
-const { separateByRanges, sliceIterablePart } = require('./base');
+const { getRanges, sliceIterablePart } = require('./base');
 
 /**
  * combineWithNext - combine array element with the next one, if possible
@@ -38,7 +38,7 @@ const concatSequences = ([neg, ones, pos]) => ([
  * @returns {Array[Array.Number | Number]} an array of pairs and singles
  */
 const getSumSequence = arr => concatSequences(
-  separateByRanges(
+  getRanges(
     [...arr].sort((a, b) => a - b),
   ),
 );

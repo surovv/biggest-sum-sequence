@@ -42,6 +42,18 @@ const separateByRanges = arr => separateByIntervals(
 );
 
 /**
+ * getRanges - separateByRanges and reverse (1, +∞) range
+ *
+ * @param {Array.Number} arr
+ *
+ * @returns {Array.Array.Number}
+ */
+const getRanges = (arr) => {
+  const [neg, ones, pos] = separateByRanges(arr);
+  return [neg, ones, pos.slice().reverse()];
+};
+
+/**
  * sliceIterablePart - slice arr to needed length when expect to operate
  *  with two elements at one step
  *
@@ -53,6 +65,6 @@ const sliceIterablePart = arr => arr.slice(0, Math.ceil(arr.length / 2));
 
 
 module.exports = {
-  separateByRanges,
+  getRanges,
   sliceIterablePart,
 };
